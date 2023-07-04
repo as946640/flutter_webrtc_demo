@@ -14,7 +14,7 @@ class WebRTCUri {
   late String streamUrl;
 
   /// webrtc 地址解析
-  static WebRTCUri parse(String url, {required type}) {
+  static WebRTCUri parse(String url, {type = 'play'}) {
     Uri uri = Uri.parse(url);
 
     String schema = 'https'; // For native, default to HTTPS
@@ -32,6 +32,10 @@ class WebRTCUri {
     }
 
     String api = '/rtc/v1/play/';
+     // 如果是推流的话
+    if (type == 'publish') {
+      api = '/rtc/v1/publish/';
+    }
     if (uri.queryParameters.containsKey('play')) {
       api = uri.queryParameters['play']!;
     }
