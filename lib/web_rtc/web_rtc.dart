@@ -189,20 +189,24 @@ class _WebRtcWidgetState extends State<WebRtcWidget> {
   }
 
   Widget BotInput({required Function(String value) send}) {
-    return TextField(
-      autofocus: true,
-      textInputAction: TextInputAction.send,
-      textAlignVertical: TextAlignVertical.center, // 垂直居中对
-      decoration: const InputDecoration(
-        isCollapsed: true,
-        hintText: '输入推拉流地址...',
-        border: InputBorder.none,
-        counterText: '',
+    return SizedBox(
+      /// 暂时这样写死 方便输入
+      height: 500,
+      child: TextField(
+        autofocus: true,
+        textInputAction: TextInputAction.send,
+        textAlignVertical: TextAlignVertical.center, // 垂直居中对
+        decoration: const InputDecoration(
+          isCollapsed: true,
+          hintText: '输入推拉流地址...',
+          border: InputBorder.none,
+          counterText: '',
+        ),
+        onSubmitted: (value) {
+          Navigator.of(context).pop();
+          send.call(value);
+        },
       ),
-      onSubmitted: (value) {
-        Navigator.of(context).pop();
-        send.call(value);
-      },
     );
   }
 
